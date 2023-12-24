@@ -3,8 +3,11 @@ import { CgProfile } from "react-icons/cg";
 import { CgShoppingBag } from "react-icons/cg";
 import { GrFavorite } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const bag = useSelector((store) => store.bag);
+
   return (
     <header>
       <div className="logo_container">
@@ -47,7 +50,7 @@ const Header = () => {
         <Link className="action_container" to="/bag">
           <CgShoppingBag />
           <span className="action_name">Bag</span>
-          <span className="bag-item-count">0</span>
+          <span className="bag-item-count">{bag.length}</span>
         </Link>
       </div>
     </header>

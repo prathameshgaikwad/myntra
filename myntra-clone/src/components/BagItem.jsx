@@ -1,4 +1,15 @@
+import { useDispatch } from "react-redux";
+import { bagActions } from "../store/bagSlice";
+import { TiDelete } from "react-icons/ti";
+import PropTypes from "prop-types";
+
 const BagItem = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const handleRemoveFromBag = () => {
+    dispatch(bagActions.removeFromBag(item.id));
+  };
+
   return (
     <div className="bag-item-container">
       <div className="item-left-part">
@@ -24,11 +35,25 @@ const BagItem = ({ item }) => {
         </div>
       </div>
 
-      <div className="remove-from-cart" onClick={() => {}}>
-        X
+      <div className="remove-from-cart" onClick={handleRemoveFromBag}>
+        <TiDelete />
       </div>
     </div>
   );
+};
+
+BagItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    company: PropTypes.string.isRequired,
+    item_name: PropTypes.string.isRequired,
+    current_price: PropTypes.number.isRequired,
+    original_price: PropTypes.number.isRequired,
+    discount_percentage: PropTypes.number.isRequired,
+    return_period: PropTypes.string.isRequired,
+    delivery_date: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default BagItem;
